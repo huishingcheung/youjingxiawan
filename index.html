@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI智能游径规划系统</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- 头部导航 -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-route"></i>
+                <h1>AI智能游径规划</h1>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn active" data-tab="map">地图导航</button>
+                <button class="nav-btn" data-tab="gallery">景点图库</button>
+                <button class="nav-btn" data-tab="about">关于系统</button>
+            </nav>
+        </header>
+
+        <!-- 主要内容区域 -->
+        <main class="main-content">
+            <!-- 地图导航标签页 -->
+            <div class="tab-content active" id="map-tab">
+                <div class="map-container">
+                    <!-- 地图区域 -->
+                    <div class="map-section">
+                        <div id="map"></div>
+                        <div class="map-controls">
+                            <button class="control-btn" id="locate-btn">
+                                <i class="fas fa-location-arrow"></i>
+                                定位
+                            </button>
+                            <button class="control-btn" id="clear-route">
+                                <i class="fas fa-trash"></i>
+                                清除路线
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- AI对话区域 -->
+                    <div class="chat-section">
+                        <div class="chat-header">
+                            <i class="fas fa-robot"></i>
+                            <h3>AI导航助手</h3>
+                            <span class="status online">在线</span>
+                        </div>
+                        
+                        <div class="chat-messages" id="chat-messages">
+                            <div class="message bot-message">
+                                <div class="message-avatar">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <div class="message-content">
+                                    <p>您好！我是您的AI导航助手。请告诉我您想去哪里，我会为您规划最佳路线。</p>
+                                    <span class="message-time">刚刚</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="chat-input-container">
+                            <div class="quick-actions">
+                                <button class="quick-btn" data-query="我想去最近的景点">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    最近景点
+                                </button>
+                                <button class="quick-btn" data-query="推荐一条观光路线">
+                                    <i class="fas fa-route"></i>
+                                    观光路线
+                                </button>
+                                <button class="quick-btn" data-query="找个安静的地方">
+                                    <i class="fas fa-leaf"></i>
+                                    安静场所
+                                </button>
+                            </div>
+                            
+                            <div class="input-group">
+                                <input type="text" id="user-input" placeholder="请输入您的目的地或需求..." maxlength="200">
+                                <button id="send-btn">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 景点图库标签页 -->
+            <div class="tab-content" id="gallery-tab">
+                <div class="gallery-container">
+                    <h2>景点图库</h2>
+                    <div class="gallery-grid" id="gallery-grid">
+                        <!-- 图片将通过JavaScript动态加载 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 关于系统标签页 -->
+            <div class="tab-content" id="about-tab">
+                <div class="about-container">
+                    <h2>关于AI智能游径规划系统</h2>
+                    <div class="about-content">
+                        <div class="feature-card">
+                            <i class="fas fa-brain"></i>
+                            <h3>智能规划</h3>
+                            <p>基于AI算法，为您推荐最优游览路线</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-map"></i>
+                            <h3>实时导航</h3>
+                            <p>提供实时位置服务和路线导航</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-comments"></i>
+                            <h3>智能对话</h3>
+                            <p>自然语言交互，理解您的需求</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 加载提示 -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>AI正在为您规划路线...</p>
+        </div>
+    </div>
+
+    <!-- JavaScript库 -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
